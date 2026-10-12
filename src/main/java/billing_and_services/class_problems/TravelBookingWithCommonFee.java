@@ -1,0 +1,6 @@
+import java.util.*;
+abstract class TravelBooking {double distance;static final double BOOKING_FEE=50.0;TravelBooking(double d){distance=d;}abstract double calculateFare();double calculateTotal(){return calculateFare()+BOOKING_FEE;}abstract String getMode();}
+class BusBooking extends TravelBooking {BusBooking(double d){super(d);}double calculateFare(){return distance*2.0;}String getMode(){return "BUS";}}
+class TrainBooking extends TravelBooking {TrainBooking(double d){super(d);}double calculateFare(){return distance*1.5;}String getMode(){return "TRAIN";}}
+class FlightBooking extends TravelBooking {FlightBooking(double d){super(d);}double calculateFare(){return 2500+distance*4.0;}String getMode(){return "FLIGHT";}}
+public class TravelBookingWithCommonFee {public static void main(String[] args){Scanner sc=new Scanner(System.in);int n=sc.nextInt();for(int i=0;i<n;i++){String mode=sc.next();double distance=sc.nextDouble();TravelBooking b;switch(mode){case "BUS":b=new BusBooking(distance);break;case "TRAIN":b=new TrainBooking(distance);break;default:b=new FlightBooking(distance);}System.out.printf("%s: %.2f%n",b.getMode(),b.calculateTotal());}sc.close();}}
