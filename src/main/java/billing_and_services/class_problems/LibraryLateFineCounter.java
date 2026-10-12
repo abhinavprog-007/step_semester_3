@@ -1,0 +1,6 @@
+import java.util.*;
+abstract class LibraryItem {String title;int daysLate;LibraryItem(String t,int d){title=t;daysLate=d;}abstract double calculateFine();}
+class BookItem extends LibraryItem {BookItem(String t,int d){super(t,d);}double calculateFine(){return daysLate*2.0;}}
+class DVDItem extends LibraryItem {DVDItem(String t,int d){super(t,d);}double calculateFine(){return Math.min(daysLate*5.0,50.0);}}
+class MagazineItem extends LibraryItem {MagazineItem(String t,int d){super(t,d);}double calculateFine(){return daysLate;}}
+public class LibraryLateFineCounter {public static void main(String[] args){Scanner sc=new Scanner(System.in);int n=sc.nextInt();double total=0;for(int i=0;i<n;i++){String type=sc.next(),title=sc.next();int days=sc.nextInt();LibraryItem item;switch(type){case "BOOK":item=new BookItem(title,days);break;case "DVD":item=new DVDItem(title,days);break;default:item=new MagazineItem(title,days);}double fine=item.calculateFine();System.out.printf("%s: %.2f%n",item.title,fine);total+=fine;}System.out.printf("Total Fines: %.2f%n",total);sc.close();}}
