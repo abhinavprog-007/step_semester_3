@@ -1,0 +1,6 @@
+import java.util.*;
+abstract class Room {int units;Room(int u){units=u;}abstract double calculate();abstract String getType();}
+class SingleRoom extends Room {SingleRoom(int u){super(u);}double calculate(){return units*8.0;}String getType(){return "SINGLE";}}
+class SharedRoom extends Room {int occupants;SharedRoom(int u,int o){super(u);occupants=o;}double calculate(){return (units*6.0)/occupants;}String getType(){return "SHARED";}}
+class ACRoom extends Room {ACRoom(int u){super(u);}double calculate(){return units*10.0+200;}String getType(){return "AC";}}
+public class HostelElectricityBill {public static void main(String[] args){Scanner sc=new Scanner(System.in);int n=sc.nextInt();double total=0;for(int i=0;i<n;i++){String type=sc.next();int units=sc.nextInt();Room r;switch(type){case "SINGLE":r=new SingleRoom(units);break;case "SHARED":r=new SharedRoom(units,sc.nextInt());break;default:r=new ACRoom(units);}double bill=r.calculate();System.out.printf("%s: %.2f%n",r.getType(),bill);total+=bill;}System.out.printf("Total: %.2f%n",total);sc.close();}}
