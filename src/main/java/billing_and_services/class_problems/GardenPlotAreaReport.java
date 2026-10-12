@@ -1,0 +1,6 @@
+import java.util.*;
+abstract class Plot {String owner;Plot(String o){owner=o;}abstract double calculateArea();abstract String getShape();}
+class Circle extends Plot {double radius;Circle(String o,double r){super(o);radius=r;}double calculateArea(){return Math.PI*radius*radius;}String getShape(){return "CIRCLE";}}
+class Rectangle extends Plot {double length,width;Rectangle(String o,double l,double w){super(o);length=l;width=w;}double calculateArea(){return length*width;}String getShape(){return "RECTANGLE";}}
+class Triangle extends Plot {double base,height;Triangle(String o,double b,double h){super(o);base=b;height=h;}double calculateArea(){return .5*base*height;}String getShape(){return "TRIANGLE";}}
+public class GardenPlotAreaReport {public static void main(String[] args){Scanner sc=new Scanner(System.in);int n=sc.nextInt();double total=0;for(int i=0;i<n;i++){String type=sc.next(),owner=sc.next();Plot p;switch(type){case "CIRCLE":p=new Circle(owner,sc.nextDouble());break;case "RECTANGLE":p=new Rectangle(owner,sc.nextDouble(),sc.nextDouble());break;default:p=new Triangle(owner,sc.nextDouble(),sc.nextDouble());}double area=p.calculateArea();System.out.printf("%s (%s): %.2f%n",p.owner,p.getShape(),area);total+=area;}System.out.printf("Total Area: %.2f%n",total);sc.close();}}
